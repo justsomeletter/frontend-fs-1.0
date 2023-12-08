@@ -5,6 +5,7 @@ function Modal({open,onClose}) {
   if(!open) return null
   return (
     <div onClick={onClose} className="overlay">
+      {console.log(onClose)}
       <div onClick={(e) => e.stopPropagation()} className="modal-container">
       <h1>Please enter below details</h1>
       <form action="" className="modal">

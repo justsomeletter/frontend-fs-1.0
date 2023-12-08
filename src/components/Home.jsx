@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaCamera, FaSearch, FaTimes, FaPlusSquare } from "react-icons/fa";
+import { FaCamera, FaSearch, FaPlusSquare } from "react-icons/fa";
 import Modal from "../components/Modal";
 import "../components-style/Home.css";
 import { data } from "../assets/data/data.js";
@@ -49,31 +49,24 @@ function Home() {
         understanding of the project */}
         <button
           className="search-icon"
-          onClick={(e) => setSearch(e.target.value)}
+          onClick={(e) => setSearch(search)}
         >
           <FaSearch />
         </button>
       </div>
-      <div onClick={() => openModal(true)}>
-        {data
-          .filter(({ id }) => {
-            return search.toLocaleLowerCase() === ""
-              ? id
-              : id.toLocaleLowerCase().includes(search);
-          })
-          .map(({ id }) => (
-            <>
-              <div>
-                <h1 onClick={() => SetOpenModal(true)}>{id}</h1>
-                <Modal
-                  key={id}
-                  open={openModal}
-                  onClose={() => SetOpenModal(false)}
-                />
-              </div>
-            </>
-          ))}
-      </div>
+      {data
+        .filter(({ id }) => id.toLocaleLowerCase().includes(search))
+        .map(({ id }) => (
+          <>
+            <div key={id}>
+              <h1 onClick={() => SetOpenModal(true)}>{id}</h1>
+            </div>
+            <Modal
+              open={openModal}
+              onClose={() => SetOpenModal(false)}
+            />
+          </>
+        ))}
     </div>
   );
 }
