@@ -13,7 +13,11 @@ function Home() {
   const [search, setSearch] = useState("");
 
   // to open modal we use simple conditional rendering approach with boolean variable
-  const [openModal, SetOpenModal] = useState(false);
+  const [openModal, SetOpenModal] = useState(null);
+
+  const handleOpenModel = (modelId) => {
+    SetOpenModal(modelId);
+  };
 
   const handleSearchButtonClick = () => {
     // why this function is not wokring as it should be wprking ?
@@ -54,21 +58,23 @@ function Home() {
           <FaSearch />
         </button>
       </div>
-      {data
-        .filter(({ id }) => id.toLocaleLowerCase().includes(search))
-        .map(({ id }) => (
-          <>
+      <div>
+        {data
+          .filter(({ id }) => id.toLocaleLowerCase().includes(search))
+          .map(({ id }) => (
             <div key={id}>
-              <h1 onClick={() => SetOpenModal(true)}>{id}</h1>
+              <h1 onClick={() => handleOpenModel(id)}>{id}</h1>
+              {openModal === id && (
+                <Modal
+                  id = {id}
+                  open={openModal}
+                  onClose={() => SetOpenModal(false)}
+                />
+              )}
             </div>
-            <Modal
-              open={openModal}
-              onClose={() => SetOpenModal(false)}
-            />
-          </>
-        ))}
-    </div>
-  );
-}
+          ))}
+      </div>
 
-export default Home;
+    </div>
+  )
+} export default Home;

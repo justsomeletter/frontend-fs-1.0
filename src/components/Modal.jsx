@@ -1,13 +1,12 @@
 import FormInput from "./FormInput";
 import "../components-style/modal.css";
 
-function Modal({open,onClose}) {
-  if(!open) return null
+function Modal({onClose,id}) {
   return (
     <div onClick={onClose} className="overlay">
-      {console.log(onClose)}
       <div onClick={(e) => e.stopPropagation()} className="modal-container">
       <h1>Please enter below details</h1>
+      <h1>{id}</h1>
       <form action="" className="modal">
         <FormInput label="Fire Truck No." placeholder="Reg No. plate" />
         <FormInput
